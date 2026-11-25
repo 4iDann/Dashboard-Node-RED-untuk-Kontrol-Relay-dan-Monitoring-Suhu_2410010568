@@ -17,9 +17,3 @@ Mini proyek IoT: ESP32 + DHT22 + Node-RED Dashboard via MQTT (HiveMQ public brok
 
 ## Pin
 DHT22 = GPIO 4, Relay = GPIO 26, LED PWM = GPIO 2
-
-## Cara pakai
-1. NIM sudah diisi (2410010568) di file `.json` dan `.ino`.
-2. Node-RED: install `node-red-dashboard`, lalu Menu > Import > pilih file JSON > Deploy.
-3. Isi SSID/password WiFi di `.ino`, upload ke ESP32 (atau jalankan di Wokwi).
-4. Buka dashboard: `http://localhost:1880/ui`
