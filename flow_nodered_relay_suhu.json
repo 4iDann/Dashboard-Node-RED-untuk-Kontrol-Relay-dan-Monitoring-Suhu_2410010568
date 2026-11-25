@@ -1,0 +1,19 @@
+[
+  {"id":"tab_iot","type":"tab","label":"Dashboard Relay & Suhu","disabled":false,"info":"Mini proyek materi 10."},
+  {"id":"broker1","type":"mqtt-broker","name":"HiveMQ Public","broker":"broker.hivemq.com","port":"1883","clientid":"","autoConnect":true,"usetls":false,"protocolVersion":"4","keepalive":"60","cleansession":true,"autoUnsubscribe":true,"birthTopic":"","closeTopic":"","willTopic":""},
+  {"id":"ui_tab1","type":"ui_tab","name":"Kontrol IoT","icon":"dashboard","disabled":false,"hidden":false},
+  {"id":"ui_grp_sensor","type":"ui_group","name":"Monitoring Suhu","tab":"ui_tab1","order":1,"disp":true,"width":"6","collapse":false},
+  {"id":"ui_grp_ctrl","type":"ui_group","name":"Kontrol Aktuator","tab":"ui_tab1","order":2,"disp":true,"width":"6","collapse":false},
+
+  {"id":"mqtt_in_suhu","type":"mqtt in","z":"tab_iot","name":"Suhu dari ESP32","topic":"iot/2410010568/sensor/suhu","qos":"0","datatype":"utf8","broker":"broker1","nl":false,"rap":true,"rh":0,"inputs":0,"x":150,"y":100,"wires":[["to_number"]]},
+  {"id":"to_number","type":"change","z":"tab_iot","name":"String -> Angka","rules":[{"t":"set","p":"payload","pt":"msg","to":"$number(payload)","tot":"jsonata"}],"action":"","property":"","from":"","to":"","reg":false,"x":380,"y":100,"wires":[["gauge_suhu","text_suhu","dbg_suhu"]]},
+  {"id":"gauge_suhu","type":"ui_gauge","z":"tab_iot","name":"Gauge Suhu","group":"ui_grp_sensor","order":1,"width":6,"height":5,"gtype":"gage","title":"Suhu","label":"°C","format":"{{value | number:1}}","min":0,"max":50,"colors":["#00b500","#e6e600","#ca3838"],"seg1":30,"seg2":38,"className":"","x":620,"y":60,"wires":[]},
+  {"id":"text_suhu","type":"ui_text","z":"tab_iot","group":"ui_grp_sensor","order":2,"width":6,"height":1,"name":"Teks Suhu","label":"Suhu terkini","format":"{{msg.payload | number:1}} °C","layout":"row-spread","className":"","x":620,"y":100,"wires":[]},
+  {"id":"dbg_suhu","type":"debug","z":"tab_iot","name":"Debug suhu","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":620,"y":140,"wires":[]},
+
+  {"id":"sw_relay","type":"ui_switch","z":"tab_iot","name":"Switch Relay","label":"Relay (GPIO 26)","tooltip":"","group":"ui_grp_ctrl","order":1,"width":6,"height":1,"passthru":false,"decouple":"false","topic":"","topicType":"str","style":"","onvalue":"ON","onvalueType":"str","onicon":"","oncolor":"","offvalue":"OFF","offvalueType":"str","officon":"","offcolor":"","animate":true,"className":"","x":150,"y":240,"wires":[["mqtt_out_relay"]]},
+  {"id":"mqtt_out_relay","type":"mqtt out","z":"tab_iot","name":"Kirim Relay","topic":"iot/2410010568/aktuator/relay","qos":"0","retain":"false","respTopic":"","contentType":"","userProps":"","correl":"","expiry":"","broker":"broker1","x":420,"y":240,"wires":[]},
+
+  {"id":"sl_pwm","type":"ui_slider","z":"tab_iot","name":"Slider PWM","label":"PWM LED (GPIO 2)","tooltip":"","group":"ui_grp_ctrl","order":2,"width":6,"height":1,"passthru":false,"outs":"end","topic":"","topicType":"str","min":0,"max":255,"step":1,"className":"","x":150,"y":320,"wires":[["mqtt_out_pwm"]]},
+  {"id":"mqtt_out_pwm","type":"mqtt out","z":"tab_iot","name":"Kirim PWM","topic":"iot/2410010568/aktuator/pwm","qos":"0","retain":"false","respTopic":"","contentType":"","userProps":"","correl":"","expiry":"","broker":"broker1","x":420,"y":320,"wires":[]}
+]
