@@ -1,7 +1,5 @@
 # Dashboard-Node-RED-untuk-Kontrol-Relay-dan-Monitoring-Suhu_2410010568
 
-# Dashboard Node-RED untuk Kontrol Relay dan Monitoring Suhu
-
 Mini proyek IoT: ESP32 + DHT22 + Node-RED Dashboard via MQTT (HiveMQ public broker).
 
 ## Isi repo
