@@ -17,3 +17,6 @@ Mini proyek IoT: ESP32 + DHT22 + Node-RED Dashboard via MQTT (HiveMQ public brok
 
 ## Pin
 DHT22 = GPIO 4, Relay = GPIO 26, LED PWM = GPIO 2
+
+## Link Wokwi
+https://wokwi.com/projects/481639288846643201
